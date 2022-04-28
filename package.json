@@ -1,11 +1,7 @@
 {
-  "dependencies": {
-    "rollbar": "^2.25.0"
-  },
   "name": "day-4",
   "version": "1.0.0",
   "main": "server/index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js"
@@ -13,5 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "rollbar": "^2.25.0"
+  }
 }
