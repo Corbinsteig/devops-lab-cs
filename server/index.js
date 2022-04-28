@@ -26,9 +26,9 @@ app.get('/error', (req, res) => {
   } catch (err) {
   rollbar.error('invalid function')
   rollbar.critical('invalid function')
-  // rollbar.warning("Facebook API unavailable")
+  rollbar.warning("Facebook API unavailable")
   rollbar.info("User logged in")
-  // rollbar.debug("Cron job starting")
+  rollbar.debug("Cron job starting")
   }
 })
 
