@@ -25,7 +25,7 @@ app.get('/error', (req, res) => {
     madeUp()
   } catch (err) {
   rollbar.error('invalid function')
-  rollbar.critical('invalid function')
+  rollbar.critical('critical invalid function')
   rollbar.warning("Facebook API unavailable")
   rollbar.info("User logged in")
   rollbar.debug("Cron job starting")
