@@ -19,6 +19,14 @@ app.get('/', (req, res) => {
     rollbar.info('html file served successfully.')
 })
 
+app.get('/error', (req, res) => {
+  try {
+    madeUp()
+  } catch (err) {
+    rollbar.error('invalid function')
+  }
+})
+
 app.use(rollbar.errorHandler())
 
 const port = process.env.PORT || 5050
