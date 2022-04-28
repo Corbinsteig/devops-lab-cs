@@ -23,7 +23,7 @@ app.get('/error', (req, res) => {
   try {
     madeUp()
   } catch (err) {
-    rollbar.critical('invalid function')
+    Rollbar.critical('invalid function')
   }
 })
 
