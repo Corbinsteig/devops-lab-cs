@@ -19,10 +19,11 @@ app.get('/', (req, res) => {
     rollbar.info('html file served successfully.')
 })
 
-app.get('/critical', (req, res) => {
+app.get('/error', (req, res) => {
   try {
     madeUp()
   } catch (err) {
+    rollbar.error('invalid function')
     rollbar.critical('invalid function')
   }
 })
