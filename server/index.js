@@ -4,12 +4,11 @@ const path = require('path')
 const app = express()
 app.use(express.json())
 
-// include and initialize the rollbar library with your access token
-const Rollbar = require('rollbar')
-let rollbar = new Rollbar({
-    accessToken: '2b72c7aa82ec46a6a0f120b91e14b806',
-    captureUncaught: true,
-    captureUnhandledRejections: true,
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: '2b72c7aa82ec46a6a0f120b91e14b806',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
 })
 
 // record a generic message and send it to Rollbar
@@ -20,39 +19,6 @@ app.get('/', (req, res) => {
     rollbar.info('html file served successfully.')
 })
 
-
-let students = ['scott']
-
-app.post('/api/student', (req, res)=>{
-    let {name} = req.body
-    name = name.trim()
-
-    students.push(name)
-
-    res.status(200).send(students)
-})
-
-app.post('/api/student', (req, res)=>{
-    let {name} = req.body
-    name = name.trim()
-
-    const index = students.findIndex(studentName=> studentName === name)
-
-    if(index === -1 && name !== ''){
-        students.push(name)
-        rollbar.log('Student added successfully', {author: 'Scott', type: 'manual entry'})
-        res.status(200).send(students)
-    } else if (name === ''){
-        rollbar.error('No name given')
-        res.status(400).send('must provide a name.')
-    } else {
-        rollbar.error('student already exists')
-        res.status(400).send('that student already exists')
-    }
-
-})
-
-// Let's also add some top-level middleware that will track any errors that occur in our server:
 app.use(rollbar.errorHandler())
 
 const port = process.env.PORT || 5050
