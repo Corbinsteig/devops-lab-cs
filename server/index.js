@@ -13,6 +13,7 @@ var rollbar = new Rollbar({
 
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
+app.use(rollbar.errorHandler())
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'))
@@ -23,12 +24,11 @@ app.get('/error', (req, res) => {
   try {
     madeUp()
   } catch (err) {
-  // rollbar.error('invalid function')
+  rollbar.error('invalid function')
   rollbar.critical('invalid function')
   // rollbar.warning("Facebook API unavailable")
-  // rollbar.info("User logged in")
+  rollbar.info("User logged in")
   // rollbar.debug("Cron job starting")
-  app.use(rollbar.errorHandler())
   }
 })
 
