@@ -25,14 +25,13 @@ app.get('/error', (req, res) => {
   } catch (err) {
   // rollbar.error('invalid function')
   rollbar.critical('invalid function')
-  // Rollbar.warning("Facebook API unavailable")
-  // Rollbar.info("User logged in")
-  // Rollbar.debug("Cron job starting")
+  // rollbar.warning("Facebook API unavailable")
+  // rollbar.info("User logged in")
+  // rollbar.debug("Cron job starting")
+  app.use(rollbar.errorHandler())
   }
 })
 
-app.use(rollbar.errorHandler())
-app.use(rollbar.criticalHandler())
 
 const port = process.env.PORT || 5050
 
